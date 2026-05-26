@@ -1,10 +1,11 @@
 # **PLANTALYZE - Clasificación de especies de plantas**
 
-Este proyecto para la materia de TC3002B busca implementar un modelo de machine learning que pueda clasificar diferentes especies de plantas, verduras y frutas a partir de imágenes.
-
 ## Descripción general
+Plantalyze es un clasificador de especies de plantas que utiliza técnicas de aprendizaje para clasificar diferentes especies de plantas a partir de imágenes.
 
-El dataset es para clasificación. Cuenta con una distribución de 70/20/10 para entrenamiento, prueba y validación respectivamente. El dataset lo obtuve de Kaggle, especificamente de [Plants Classification](https://www.kaggle.com/datasets/marquis03/plants-classification). Este dataset contiene imágenes de diferentes especies de plantas, etiquetadas con su respectiva clase.
+## Dataset
+
+El dataset utilizado para el modelo es el [Plants Classification](https://www.kaggle.com/datasets/marquis03/plants-classification), el cual contiene 30000 imágenes de plantas de 30 especies diferentes. Cada especie de planta contiene 1000 imágenes.
 
 Las clases presentes en el dataset son:
 - aloevera
@@ -38,7 +39,16 @@ Las clases presentes en el dataset son:
 - waterapple
 - watermelon
 
-El dataset ya estaba separado por lo que no fue necesario realizar un proceso de separación adicional (split), lo que si se realizó fue un proceso de preprocesamiento de las imágenes. Esto para que todas tuvieran un tamaño de 128x128 ya que es crucial para el entrenamiento del modelo. También se dejó listo un proceso de data augmentation para aumentar la cantidad de datos disponibles para el entrenamiento, sólo se creo el proceso y se guardo en un directorio aparte. En caso de querer usarlo, para el entrenamiento habría que unificarlo con el dataset de entrenamiento original.
+### Preprocesamiento del dataset
+
+El dataset obtenido desde Kaggle ya se encontraba dividido en los conjuntos de entrenamiento, validación y prueba, por lo que no fue necesario realizar un proceso de separación adicional (split). La distribución con la que ya se contaba es de 70% para entrenamiento (21000 imágenes), 10% para validación (3000 imágenes) y 20% para prueba (6000 imágenes). Para cada categoría de planta, se asignaron 700 imágenes para entrenamiento, 100 imágenes para validación y 200 imágenes para prueba. 
+
+Los splits más comunes en la literatura son 70:30 o 80:20, por lo que la distribución que ya venía desde Kaggle fue bastante adecuada para el proyecto. En todo caso, se puede considerar un reajuste de los splits en caso de que el modelo no esté obteniendo buenos resultados, pero por el momento se decidió mantener la distribución original.
+
+Lo que si se realizó fue un proceso de preprocesamiento de las imágenes, el cual consistió en redimensionar cada imagen a un tamaño de 128x128 píxeles. Esto debido a que la uniformidad en el tamaño de las imágenes es importante para el entrenamiento del modelo, ya que permite que la red neuronal pueda procesar las imágenes de manera mas eficiente y obtener mejores resultados.
+
+**Data Augmentation**
+En este primer avance se dejó listo un proceso de data augmentation para aumentar la cantidad de imágenes disponibles para el entrenamiento, sólo se creo el proceso y se guardo en un directorio aparte. En caso de querer utilizarlo, para el entrenamiento, habría que unificarlo con el dataset de entrenamiento original.
 
 ## Autor
 
