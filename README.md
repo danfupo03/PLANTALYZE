@@ -334,7 +334,7 @@ Omur, S., Efendioglu, N. O., & Sinecen, M. (2025). Classification of color image
 
 Samin, O. B., Omar, M., & Mansoor, M. (2021). CapPlant: a capsule network based framework for plant disease classification. PeerJ Computer Science, 7, e752. https://doi.org/10.7717/peerj-cs.752
 
-M. Brahimi, S. Mahmoudi, K. Boukhalfa, and A. Moussaoui, "Deep interpretable architecture for plant diseases classification," arXiv preprint arXiv:1905.13523, 2019. [Online]. Available: https://arxiv.org/abs/1905.13523
+Brahimi, M., Mahmoudi, S., Boukhalfa, K., & Moussaoui, A. (2019, May 31). Deep interpretable architecture for plant diseases classification. arXiv.org. https://arxiv.org/abs/1905.13523
 
 Khan, I. U., Khan, H. A., & Lee, J. W. (2024). Dual-Stream architecture enhanced by Soft-Attention mechanism for plant species classification. Plants, 13(18), 2655. https://doi.org/10.3390/plants13182655
 
@@ -346,12 +346,12 @@ Lee, A. (2024, May 30). Adam vs SGD : What are the optimizers in neural networ
 
 Sabour, S., Frosst, N., & Hinton, G. E. (2017). Dynamic routing between capsules. arXiv (Cornell University). https://doi.org/10.48550/arxiv.1710.09829
 
-Aurélien Géron. (2017, November 21). Capsule Networks (CapsNets) – tutorial [Video]. YouTube. https://www.youtube.com/watch?v=pPN8d0E3900
+Aurélien Géron. (2017b, November 21). Capsule Networks (CapsNets) – tutorial [Video]. YouTube. https://www.youtube.com/watch?v=pPN8d0E3900
 
-Aurélien Géron. (2017b, November 30). How to implement CapsNets using TensorFlow [Video]. YouTube. https://www.youtube.com/watch?v=2Kawrd5szHE
+Aurélien Géron. (2017c, November 30). How to implement CapsNets using TensorFlow [Video]. YouTube. https://www.youtube.com/watch?v=2Kawrd5szHE
 
 Desire. (n.d.). Capsule-Network-and-CNN-Keras-Implementation-on-MNIST-Dataset/Keras Implementation of CNN and Capsule Network on MNIST .ipynb at master · Desire100/Capsule-Network-and-CNN-Keras-Implementation-on-MNIST-Dataset. GitHub. https://github.com/Desire100/Capsule-Network-and-CNN-Keras-Implementation-on-MNIST-Dataset/blob/master/Keras%20Implementation%20of%20CNN%20and%20Capsule%20Network%20on%20MNIST%20.ipynb
 
 DanielSebasCM. (n.d.). GitHub - DanielSebasCM/ml_benji. GitHub. https://github.com/DanielSebasCM/ml_benji/
 
-MonicaMMartinezV. (n.d.). GitHub - MonicaMMartinezV/Mod2.ImplementacionTecnicaDeAprendizajeMaquina. GitHub. https://github.com/MonicaMMartinezV/Mod2.ImplementacionTecnicaDeAprendizajeMaquina
+MonicaMMartinezV. (n.d.-b). GitHub - MonicaMMartinezV/Mod2.ImplementacionTecnicaDeAprendizajeMaquina. GitHub. https://github.com/MonicaMMartinezV/Mod2.ImplementacionTecnicaDeAprendizajeMaquina
