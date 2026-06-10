@@ -252,17 +252,6 @@ El Modelo 5 sigue basado en el paper [CapPlant: a capsule network based framewor
 
 Se mantiene la arquitectura del Modelo 4 pero se añade una capa cápsula convolucional después de la última capa convolucional.
 
-#### Explicación de la capa cápsula con código
-
-```python
-def squash(s, axis=-1):
-    squared_norm  = tf.reduce_sum(tf.square(s), axis=axis, keepdims=True)
-    safe_norm     = tf.sqrt(squared_norm + 1e-8)
-    squash_factor = squared_norm / (1. + squared_norm)
-    unit_vector   = s / safe_norm
-    return squash_factor * unit_vector
-```
-
 #### Resultados
 
 | Metric    | Train  | Val    | Test   |
