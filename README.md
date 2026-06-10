@@ -217,13 +217,12 @@ El Modelo 4 es mejor modelo CNN del proyecto, como una *accuracy* de 65.85% en t
 
 ## Modelo 5: CNN con 4 capas convolucionales entrenada con SGD, data augmentation, early stopping y capa cápsula
 
-
 ### Redes de cápsulas (Capsule Networks)
 
 #### Introducción
 Las CNN consiguen los mejores resultados para clasificación de imágenes, sin embargo, son bastante deficientes clasificando objetos en diferentes posiciones. Por lo que para conseguir un buen rendimiento requieren grandes cantidades de datos de entrenamiento que incluyan múltiples variaciones. Esto debido a que las CNN son invariantes, es decir, reconocen un patrón sin importar su traslación, rotación o escala. Cambios más radicales no se gestionan bien debido a la función de agrupación que desecha información valiosa de la imagen para aumentar el campo de visión en las capas más profundas. 
 
-Para solucionar este problema, Geoffrey Hinton propuso las redes de cápsulas (Capsule Networks). Él explica que el cerebro está divididio en módulos que pueden considerarse como cápsulas. Una cápsula es un grupo de neuronas cuya salida no es un único valor escalar sino un vector. La **longitud** de este vector representa la probabilidad de que exista un objeto en la entrada actual y la **dirección** del vector representa los parámetros de dicho objeto (posición, rotación, escala, etc.). Las cápsulas inferiores predicen la salida de las cápsulas superiores, esto a través de un algoritmo llamado "enrutamiento dinámico" (dynamic routing). Si la predicción de la cápsula inferior se alinea con la de nivel superior, el valor resultante se amplifica, mientras que si no se alinea, se reduce.
+Para solucionar este problema, Geoffrey Hinton propuso las redes de cápsulas (Capsule Networks). Él explica que el cerebro está dividido en módulos que pueden considerarse como cápsulas. Una cápsula es un grupo de neuronas cuya salida no es un único valor escalar sino un vector. La **longitud** de este vector representa la probabilidad de que exista un objeto en la entrada actual y la **dirección** del vector representa los parámetros de dicho objeto (posición, rotación, escala, etc.). Las cápsulas inferiores predicen la salida de las cápsulas superiores, esto a través de un algoritmo llamado "enrutamiento dinámico" (dynamic routing). Si la predicción de la cápsula inferior se alinea con la de nivel superior, el valor resultante se amplifica, mientras que si no se alinea, se reduce.
 
 #### Función de activación "squash"
 
@@ -250,7 +249,7 @@ Cuando una cápsula detecta fuertemente su objeto, produce un vector de gran mag
 
 El Modelo 5 sigue basado en el paper [CapPlant: a capsule network based framework for plant disease classification](https://doi.org/10.7717/peerj-cs.752), los papers de SGD mencionados en el Modelo 3, las técnicas de regularización del Modelo 2 y el Modelo 4.
 
-Se mantiene la arquitectura del Modelo 4 pero se añade una capa cápsula convolucional después de la última capa convolucional.
+Se mantiene la arquitectura del Modelo 4 pero se añade una capa cápsula convolucional después de la última capa convolucional. Para esta última iteración se decidió ser fiel al paper de referencia y seguir la implementación como se propone, volviendo así a utilizar el optimizador Adam. Cabe mencionar que el paper no realiza data augmentation, pero se decidió mantener ya que los experimentos previos mostraron que sin esta técnica el overfitting se agravaba significativamente., por lo que se decidió mantener esta técnica para asegurar una mejor generalización del modelo.
 
 #### Resultados
 
@@ -266,10 +265,10 @@ Se mantiene la arquitectura del Modelo 4 pero se añade una capa cápsula convol
 
 #### Conclusiones
 
-El Modelo 5 es el mejor modelo del proyecto, con una *accuracy* de 72.45% en test y una brecha de overfitting de solo ~2 puntos (74.57% vs 72.45%), con una pérdida de 0.79 vs 0.94 respectivamente. Esto indica que la adición de la capa cápsula mejoró el desempeño del modelo, superando los resultados obtenidos por el Modelo 4, que no contaba con dicha capa. Sin embargo, la mejora en *accuracy* fue de solo ~6 puntos (72.45% vs 65.85%), lo que sugiere que la capa cápsula contribuyó a una mejora modesta en el desempeño del modelo. Se esperaba una majeora más significativa, ya que en el paper de referencia presentaban métricas de *accuracy* superiores al 90%, aunque es importante mencionar que el dataset utilizado en dicho paper era diferente al de este proyecto, por lo que la comparación no es directa. Por otro lado el objetivo del paper era detectar enfermedades en plantas, mientras que el objetivo de este proyecto es clasificar especies de plantas, por lo que también se trata de tareas distintas. Podríamos inferir que la capa cápsula es más efectiva para detectar patrones relacionados con enfermedades en plantas, que para clasificar especies de plantas, aunque esto requeriría una investigación más profunda para confirmarlo.
-
+El Modelo 5 es el mejor modelo del proyecto, con una *accuracy* de 72.45% en test y una brecha de overfitting de solo ~2 puntos (74.57% vs 72.45%), con una pérdida de 0.79 vs 0.94 respectivamente. Esto indica que la adición de la capa cápsula mejoró el desempeño del modelo, superando los resultados obtenidos por el Modelo 4, que no contaba con dicha capa. Sin embargo, la mejora en *accuracy* fue de solo ~6 puntos (72.45% vs 65.85%), lo que sugiere que la capa cápsula contribuyó a una mejora modesta en el desempeño del modelo. Se esperaba una mejora más significativa, ya que en el paper de referencia presentaban métricas de *accuracy* superiores al 90%, aunque es importante mencionar que el dataset utilizado en dicho paper era diferente al de este proyecto, por lo que la comparación no es directa. Por otro lado el objetivo del paper era detectar enfermedades en plantas, mientras que el objetivo de este proyecto es clasificar especies de plantas, por lo que también se trata de tareas distintas. Podríamos inferir que la capa cápsula es más efectiva para detectar patrones relacionados con enfermedades en plantas, que para clasificar especies de plantas, aunque esto requeriría una investigación más profunda para confirmarlo.
 
 ## Disclaimer
+
 Para el formato de este README y la presentación de los datos en los distintos notebooks se tomó como referencia el formato utilizado por el ingeniero Daniel Cajas en su proyecto [Animal Classifier](https://github.com/DanielSebasCM/ml_benji/) y mi compañera Mónica Martínez en su proyecto [Modelos Lineales y No Lineales para la Predicción de la Esperanza de Vida: Implementación Manual y Comparativa con Random Forest](https://github.com/MonicaMMartinezV/Mod2.ImplementacionTecnicaDeAprendizajeMaquina).
 
 ## Autor
@@ -297,6 +296,16 @@ Chuan-En Lin, D. (2020, June). 8 técnicas sencillas para prevenir el sobreajust
 
 Lee, A. (2024, May 30). Adam vs SGD : What are the optimizers in neural network and when do we use? Medium. Retrieved May 31, 2026, from https://medium.com/@pumadd1227/adam-vs-sgd-what-are-the-optimizers-in-neural-network-and-when-do-we-use-238478a0eaea
 
+Sabour, S., Frosst, N., & Hinton, G. E. (2017). Dynamic routing between capsules. arXiv (Cornell University). https://doi.org/10.48550/arxiv.1710.09829
+
+Chen, T., Kornblith, S., Norouzi, M., & Hinton, G. (2020). A simple framework for contrastive learning of visual representations. arXiv (Cornell University). https://doi.org/10.48550/arxiv.2002.05709
+
+Aurélien Géron. (2017, November 21). Capsule Networks (CapsNets) – tutorial [Video]. YouTube. https://www.youtube.com/watch?v=pPN8d0E3900
+
+Aurélien Géron. (2017b, November 30). How to implement CapsNets using TensorFlow [Video]. YouTube. https://www.youtube.com/watch?v=2Kawrd5szHE
+
+Desire. (n.d.). Capsule-Network-and-CNN-Keras-Implementation-on-MNIST-Dataset/Keras Implementation of CNN and Capsule Network on MNIST .ipynb at master · Desire100/Capsule-Network-and-CNN-Keras-Implementation-on-MNIST-Dataset. GitHub. https://github.com/Desire100/Capsule-Network-and-CNN-Keras-Implementation-on-MNIST-Dataset/blob/master/Keras%20Implementation%20of%20CNN%20and%20Capsule%20Network%20on%20MNIST%20.ipynb
+
 DanielSebasCM. (n.d.). GitHub - DanielSebasCM/ml_benji. GitHub. https://github.com/DanielSebasCM/ml_benji/
 
-MonicaMMartinezV - Overview. (n.d.). GitHub. https://github.com/MonicaMMartinezV
+MonicaMMartinezV. (n.d.). GitHub - MonicaMMartinezV/Mod2.ImplementacionTecnicaDeAprendizajeMaquina. GitHub. https://github.com/MonicaMMartinezV/Mod2.ImplementacionTecnicaDeAprendizajeMaquina
