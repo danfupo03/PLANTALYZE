@@ -112,7 +112,7 @@ La arquitectura original de este paper se componía de 8 capas convolucionales e
 
 #### Conclusiones
 
-El Modelo 0 obtuvo la *accuracy* más baja del proyecto (56.52% en test). El rendimiento limitado se explica principalmente por la incopatibilidad entre la arquitectura de referencia y el dataset utilizado. El paper de referencia se enfocaba en la clasificación de cuero, con un dataset de solo 144 imágenes, mientras que este proyecto se centra en la clasificación de plantas, con un dataset de 30,000 imágenes. Adicionalmente, el paper no justifica decisiones clave como los hiperparámetros o la elección de la arquitectura, lo que reduce la solidez de su propuesta. 
+El Modelo 0 obtuvo la *accuracy* más baja del proyecto (56.52% en test). El rendimiento limitado se explica principalmente por la incompatibilidad entre la arquitectura de referencia y el dataset utilizado. El paper de referencia se enfocaba en la clasificación de cuero, con un dataset de solo 144 imágenes, mientras que este proyecto se centra en la clasificación de plantas, con un dataset de 30,000 imágenes. Adicionalmente, el paper no justifica decisiones clave como los hiperparámetros o la elección de la arquitectura, lo que reduce la solidez de su propuesta. 
 
 ### Modelo 1: CNN con 4 capas convolucionales entrenada con Adam
 
@@ -143,11 +143,11 @@ El Modelo 1 representa la línea base del proyecto y obtuvo una *accuracy* de 62
 
 [Modelo 2](./plantalyze_model_arq2_v2.ipynb)
 
-El Modelo 2 sigue basado en el paper [CapPlant: a capsule network based framework for plant disease classification](https://doi.org/10.7717/peerj-cs.752) estás técnicas fueron obtenidas de los siguientes artículos:
+El Modelo 2 sigue basado en el paper [CapPlant: a capsule network based framework for plant disease classification](https://doi.org/10.7717/peerj-cs.752) estas técnicas fueron obtenidas de los siguientes artículos:
 - [¿Cómo combatir el overfitting en el Machine Learning?](https://codificandobits.com/tutorial/como-combatir-el-overfitting/)
 - [8 técnicas sencillas para prevenir el sobreajuste](https://medium.com/data-science/8-simple-techniques-to-prevent-overfitting-4d443da2ef7d)
 
-Se sigue manteniendo la misma arquitectura del Modelo 1, pero se implementan técnicas para evitar el overfitting, como lo son el data augmentation y el early stopping. El data augmentation aplica  las técnicas mencionadas en la sección correspondiente, mientras que el early stopping detiene el entrenamiento si la *val_loss* no mejora después de 5 épocas consecutivas, lo que resultó en el paro anticipado del entrenamiento en la época 23.
+Se sigue manteniendo la misma arquitectura del Modelo 1, pero se implementan técnicas para evitar el overfitting, como lo son el data augmentation y el early stopping. El data augmentation aplica las técnicas mencionadas en la sección correspondiente, mientras que el early stopping detiene el entrenamiento si la *val_loss* no mejora después de 5 épocas consecutivas, lo que resultó en el paro anticipado del entrenamiento en la época 23.
 
 #### Resultados
 
@@ -163,7 +163,7 @@ Se sigue manteniendo la misma arquitectura del Modelo 1, pero se implementan té
 
 #### Conclusiones
 
-El Modelo 2 redujo drasticamente el overfitting respecto al Modelo 1. La brecha entre entrenamiento y test pasó de ~33 puntos a solo ~4 puntos (67.94% vs 63.33%), con una pérdida de 1.03 vs 1.33 respectivamente. La *accuracy* en test aumentó de 62.08% a 63.33%, una mejora modesta en valor absoluto pero con una generalización más sólida. 
+El Modelo 2 redujo drásticamente el overfitting respecto al Modelo 1. La brecha entre entrenamiento y test pasó de ~33 puntos a solo ~4 puntos (67.94% vs 63.33%), con una pérdida de 1.03 vs 1.33 respectivamente. La *accuracy* en test aumentó de 62.08% a 63.33%, una mejora modesta en valor absoluto pero con una generalización más sólida. 
 
 ### Modelo 3: CNN con 4 capas convolucionales entrenada con SGD y early stopping
 
@@ -213,18 +213,19 @@ Se mantiene la arquitectura del Modelo 3 y se reincopora el data augmentation. E
 
 #### Conclusiones
 
-El Modelo 4 es mejor modelo CNN del proyecto, como una *accuracy* de 65.85% en test y una brecha de overfitting de solo ~3 puntos (68.64% vs 65.85%), con una pérdida de 1.01 vs 1.23 respectivamente. Esto indica que la combinación de SGD y data augmentation es efectiva para mejorar el desempeño del modelo, superando los resultados obtenidos por cada técnica de forma individual.
+El Modelo 4 es mejor modelo hasta el momento del proyecto, con una *accuracy* de 65.85% en test y una brecha de overfitting de solo ~3 puntos (68.64% vs 65.85%), con una pérdida de 1.01 vs 1.23 respectivamente. Esto indica que la combinación de SGD y data augmentation es efectiva para mejorar el desempeño del modelo, superando los resultados obtenidos por cada técnica de forma individual.
 
-## Modelo 5: CNN con 4 capas convolucionales entrenada con SGD, data augmentation, early stopping y capa cápsula
+### Modelo 5: CNN con 4 capas convolucionales entrenada con SGD, data augmentation, early stopping y capa cápsula
 
-### Redes de cápsulas (Capsule Networks)
+#### Redes de cápsulas (Capsule Networks)
 
-#### Introducción
+**Introducción**
+
 Las CNN consiguen los mejores resultados para clasificación de imágenes, sin embargo, son bastante deficientes clasificando objetos en diferentes posiciones. Por lo que para conseguir un buen rendimiento requieren grandes cantidades de datos de entrenamiento que incluyan múltiples variaciones. Esto debido a que las CNN son invariantes, es decir, reconocen un patrón sin importar su traslación, rotación o escala. Cambios más radicales no se gestionan bien debido a la función de agrupación que desecha información valiosa de la imagen para aumentar el campo de visión en las capas más profundas. 
 
 Para solucionar este problema, Geoffrey Hinton propuso las redes de cápsulas (Capsule Networks). Él explica que el cerebro está dividido en módulos que pueden considerarse como cápsulas. Una cápsula es un grupo de neuronas cuya salida no es un único valor escalar sino un vector. La **longitud** de este vector representa la probabilidad de que exista un objeto en la entrada actual y la **dirección** del vector representa los parámetros de dicho objeto (posición, rotación, escala, etc.). Las cápsulas inferiores predicen la salida de las cápsulas superiores, esto a través de un algoritmo llamado "enrutamiento dinámico" (dynamic routing). Si la predicción de la cápsula inferior se alinea con la de nivel superior, el valor resultante se amplifica, mientras que si no se alinea, se reduce.
 
-#### Función de activación "squash"
+**Función de activación "squash"**
 
 Las cápsulas utilizan una función de activación llamada "squash" para asegurar que la longitud del vector de salida esté entre 0 y 1, lo que permite interpretar la longitud como una probabilidad.
 
@@ -237,7 +238,7 @@ Donde:
 - $\frac{\mathbf{s}_j}{\|\mathbf{s}_j\|}$ — vector unitario que preserva la dirección
 - $\mathbf{v}_j$ — vector de salida con longitud comprimida
 
-#### Ejemplo de funcionamiento
+**Ejemplo de funcionamiento**
 
 Para ejemplificarlo, supongamos que el modelo clasifica barcos (casco rectangular y vela triangular inclinada 45°) y casas (pared rectangular y techo triangular horizontal). Si la imagen muestra un rectángulo con un triángulo inclinado 45°, la cápsula del barco se activará con alta confianza. Si en cambio el triángulo aparece horizontal encima del rectángulo, la cápsula de la casa será la dominante. Esta sensibilidad a la posición y orientación relativa de las partes es precisamente lo que diferencia a las cápsulas de una CNN convencional.
 
@@ -249,7 +250,7 @@ Cuando una cápsula detecta fuertemente su objeto, produce un vector de gran mag
 
 El Modelo 5 sigue basado en el paper [CapPlant: a capsule network based framework for plant disease classification](https://doi.org/10.7717/peerj-cs.752), los papers de SGD mencionados en el Modelo 3, las técnicas de regularización del Modelo 2 y el Modelo 4.
 
-Se mantiene la arquitectura del Modelo 4 pero se añade una capa cápsula convolucional después de la última capa convolucional. Para esta última iteración se decidió ser fiel al paper de referencia y seguir la implementación como se propone, volviendo así a utilizar el optimizador Adam. Cabe mencionar que el paper no realiza data augmentation, pero se decidió mantener ya que los experimentos previos mostraron que sin esta técnica el overfitting se agravaba significativamente., por lo que se decidió mantener esta técnica para asegurar una mejor generalización del modelo.
+Se mantiene la arquitectura del Modelo 4 pero se añade una capa cápsula convolucional después de la última capa convolucional. Para esta última iteración se decidió ser fiel al paper de referencia y seguir la implementación como se propone, volviendo así a utilizar el optimizador Adam. Cabe mencionar que el paper no realiza data augmentation, pero se decidió mantener ya que los experimentos previos mostraron que sin esta técnica el overfitting se agravaba significativamente, con esto se asegura la generalización del modelo.
 
 #### Resultados
 
